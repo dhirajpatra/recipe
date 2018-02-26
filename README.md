@@ -1,6 +1,6 @@
 ## Prerequsites
 
-Used [Docker](https://www.docker.com/products/docker) to administer this test. This ensures that we get an identical result to you when we test your application out, and it also matches our internal development workflows. If you don't have it already, you'll need Docker installed on your machine. **The application MUST run in the Docker containers** - if it doesn't we cannot accept your submission. You **MAY** edit the containers or add additional ones if you like, but this  be clearly documented.
+Used [Docker](https://www.docker.com/products/docker) to administer this test. If you don't have it already, you'll need Docker installed on your machine. **The application MUST run in the Docker containers** 
 
 - Application using postgres 9.6 container. For details can check docker-compose.yml and Dockerfile.
 
