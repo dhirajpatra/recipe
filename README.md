@@ -26,7 +26,8 @@ Used [Docker](https://www.docker.com/products/docker) to administer this test. I
 ## How to run
 
 - To start the application server, run the following from root of application:
-####./instatll.sh
+
+./instatll.sh
 
 ## Requirements
 
