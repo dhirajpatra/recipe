@@ -1,0 +1,87 @@
+version: '2'
+
+volumes:
+  postgres_data: {}
+
+services:
+
+    # Application container
+    php:
+        build: ./
+        restart: unless-stopped
+        volumes:
+            - ./:/server/http
+        ports:
+            - "80:80"
+            - "443:443"
+        links:
+            - postgres
+            #- mongodb
+            #- redis
+        env_file:
+            - ./env
+        depends_on:
+              - postgres
+        #environment:
+        #    DEBUG: 'true'
+        #command: ["./wait_for_postgres.sh"]
+
+    phpunit:
+        image: binarydata/phpunit # our PHPUnit image, created or found on Docker Hub
+        volumes:
+          - /server/http:/server/http # folder where project resides. Should have same path
+          - /tmp/:/tmp/ # linking /tmp/ folder because PHPStorm stores its stuff there
+
+    #python:
+        #image: python:3.6
+        #environment:
+          #- DEBUG: 'true
+          #- PORT: '8080'
+        #volumes:
+          #- ./:/server/http
+        #links:
+            #- postgres
+            #- mongodb
+            #- redis
+        #ports:
+          #- "8080:8080"
+
+    #go:
+        #image: golang:1.8-alpine
+        #ports:
+            #- "80:8080"
+        #links:
+            #- postgres
+            #- mongodb
+            #- redis
+        #environment:
+            #DEBUG: 'true'
+            #PORT: '8080'
+
+    postgres:
+        #image: onjin/alpine-postgres:9.5
+        image: postgres:9.6
+        container_name: postgres
+        restart: unless-stopped
+        ports:
+            - "5432:5432"
+        env_file:
+            - ./env
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+            - ./postgres/script/:/docker-entrypoint-initdb.d
+
+
+    #mongodb:
+    #    image: mvertes/alpine-mongo:3.2.3
+    #    restart: unless-stopped
+    #    ports:
+    #        - "27017:27017"
+
+    #redis:
+    #    image: sickp/alpine-redis:3.2.2
+    #    restart: unless-stopped
+    #    ports:
+    #        - "6379:6379"
+
+

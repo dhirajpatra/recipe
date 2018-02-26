@@ -1,0 +1,6 @@
+POSTGRES_HOST=postgres
+POSTGRES_USER=recipe
+POSTGRES_PASSWORD=recipe
+POSTGRES_DB=recipe
+PGDATA=/tmp
+DEBUG=true
